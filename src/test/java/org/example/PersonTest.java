@@ -3,6 +3,8 @@ package org.example;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PersonTest {
@@ -115,6 +117,13 @@ class PersonTest {
 
     @Test
     void setMiddleName() {
+        //arrange
+
+        //act
+        child.setMiddleName("Bilbo");
+
+        //assert
+        assertEquals("Bilbo", child.getMiddleName());
     }
 
     @Test
@@ -130,6 +139,14 @@ class PersonTest {
 
     @Test
     void setLastName() {
+        //arrange
+
+        //act
+        father.setLastName("Took"); //andere naam dan in de setup om zeker te weten dat hij niet de naam uit de setup blijft houden
+
+        //assert
+        assertEquals("Took", father.getLastName());
+
     }
 
     @Test
@@ -145,6 +162,13 @@ class PersonTest {
 
     @Test
     void setSex() {
+        //arrange
+
+        //act
+        child.setSex('v'); //anders dan in de setup om zeker te weten dat hij niet de naam uit de setup blijft houden
+
+        //assert
+        assertEquals('v', child.getSex());
     }
 
     @Test
@@ -160,6 +184,13 @@ class PersonTest {
 
     @Test
     void setAge() {
+        //arrange
+
+        //act
+        father.setAge(52); //anders dan in de setup om zeker te weten dat hij niet de naam uit de setup blijft houden
+
+        //assert
+        assertEquals(52, father.getAge());
     }
 
     @Test
@@ -176,6 +207,13 @@ class PersonTest {
 
     @Test
     void setMother() {
+        //arrange
+
+        //act
+        child.setMother(mother);
+
+        //assert
+        assertEquals("Primula", child.getMother().getName());
     }
 
     @Test
@@ -192,6 +230,13 @@ class PersonTest {
 
     @Test
     void setFather() {
+        //arrange
+
+        //act
+        child.setFather(father);
+
+        //assert
+        assertEquals("Drogo", child.getFather().getName());
     }
 
     @Test
@@ -208,6 +253,15 @@ class PersonTest {
 
     @Test
     void setSiblings() {
+        //arrange
+        ArrayList<Person> siblings = new ArrayList<>();
+        siblings.add(sister);
+
+        //act
+        father.setSiblings(siblings);
+
+        //assert
+        assertEquals("Dora", father.getSiblings().get(0).getName());
     }
 
     @Test
@@ -224,6 +278,15 @@ class PersonTest {
 
     @Test
     void setChildren() {
+        //arrange
+        ArrayList<Person> children = new ArrayList<>();
+        children.add(child);
+
+        //act
+        father.setChildren(children);
+
+        //assert
+        assertEquals("Frodo", father.getChildren().get(0).getName());
     }
 
     @Test
@@ -240,5 +303,14 @@ class PersonTest {
 
     @Test
     void setPets() {
+        //arrange
+        ArrayList<Pet> pets = new ArrayList<>();
+        pets.add(cat);
+
+        //act
+        father.setPets(pets);
+
+        //assert
+        assertEquals("Erebor", father.getPets().get(0).getName());
     }
 }

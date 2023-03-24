@@ -69,6 +69,12 @@ public class Person {
 
     public void getGrandChildren() {
         //deze methode nog invullen
+        if(children != null) {
+
+        } else {
+            System.out.println("no grandchildren");
+        }
+
     }
 
     /* getters & setters */
