@@ -32,29 +32,23 @@ public class Person {
     }
 
     /* methodes */
-    public void addParents(Person child, Person mother, Person father) {
-        child.setMother(mother);
-        child.setFather(father);
-        mother.addChild(child, mother);
-        father.addChild(child, mother);
+    public void addParents(Person mother, Person father) {
+        setMother(mother);
+        setFather(father);
+        father.addChild(this, mother);
     }
 
-    public void addChild(Person child, Person parent){
-        if(parent.getChildren()!= null) {
-            for (Person person : parent.getChildren()) {
-                children.add(person);
-            }
-        }
+    //this moet altijd de vader zijn
+    public void addChild(Person child, Person mother){
         children.add(child);
-        parent.setChildren(children);
+        mother.setChildren(children);
+        child.setFather(this);
+        child.setMother(mother);
     }
 
-    public void addPet(Person person, Pet pet){
-        if(person.getPets() != null){
-            pets.addAll(person.getPets());
-        }
+    public void addPet(Pet pet){
         pets.add(pet);
-        person.setPets(pets);
+        pet.setOwner(this);
     }
 
     public void addSibling(Person person, Person sibling){
@@ -67,14 +61,22 @@ public class Person {
         person.setSiblings(siblings);
     }
 
-    public void getGrandChildren() {
-        //deze methode nog invullen
-        if(children != null) {
+    public ArrayList<Person> getGrandChildren() {
+        ArrayList<Person> grandchildren = new ArrayList<>();
 
-        } else {
-            System.out.println("no grandchildren");
+        for (Person child : children) {
+            grandchildren.addAll(child.children);
         }
 
+        return grandchildren;
+    }
+
+    public ArrayList<Pet> getPetGrandchildren() {
+        ArrayList<Pet> petGrandchildren = new ArrayList<>();
+        for (Person grandchild : getGrandChildren()) {
+            petGrandchildren.addAll(grandchild.getPets());
+        }
+        return petGrandchildren;
     }
 
     /* getters & setters */

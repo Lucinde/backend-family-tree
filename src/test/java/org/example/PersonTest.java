@@ -34,10 +34,10 @@ class PersonTest {
     @Test
     void addParents() {
         //arrange
-        //alle gegevens voor de arrange zijn al gezet in de variabelen en setup, deze kan dus leeg blijven bij de methodes, om wel de goede opzet te onthouden heb ik hem er wel telkens tussen gezet
+        //alle gegevens voor de arrange zijn al gezet in de variabelen en setup, deze kan dus leeg blijven bij veel methodes, om wel de goede opzet te onthouden heb ik hem er wel telkens tussen gezet
 
         //act
-        child.addParents(child, mother, father);
+        child.addParents(mother, father);
 
         //assert
         assertEquals("Primula", child.getMother().getName());
@@ -60,9 +60,10 @@ class PersonTest {
         //arrange
 
         //act
-        father.addPet(father, cat);
+        father.addPet(cat);
         //assert
         assertEquals("Erebor", father.getPets().get(0).getName());
+        assertEquals("Drogo", cat.owner.getName());
 
     }
 
@@ -79,6 +80,19 @@ class PersonTest {
 
     @Test
     void getGrandChildren() {
+        //arrange
+        Person child2 = new Person("Bilbo", "Baggins", 'm', 16);
+        child.addParents(mother, father);
+        child2.addParents(mother, father);
+        grandfather.addChild(father, grandmother);
+
+        //act
+        grandfather.getGrandChildren();
+        ArrayList<Person> listGrandchildren = grandfather.getGrandChildren();
+
+        //assert
+        assertEquals("Frodo", listGrandchildren.get(0).getName());
+        assertEquals("Bilbo", listGrandchildren.get(1).getName());
     }
 
     @Test
@@ -196,7 +210,7 @@ class PersonTest {
     @Test
     void getMother() {
         //arrange
-        child.addParents(child, mother, father);
+        child.addParents(mother, father);
 
         //act
         String output = child.getMother().getName();
@@ -219,7 +233,7 @@ class PersonTest {
     @Test
     void getFather() {
         //arrange
-        child.addParents(child, mother, father);
+        child.addParents(mother, father);
 
         //act
         String output = child.getFather().getName();
@@ -267,7 +281,7 @@ class PersonTest {
     @Test
     void getChildren() {
         //arrange
-        child.addParents(child, mother, father);
+        child.addParents(mother, father);
 
         //act
         String output = father.getChildren().get(0).getName();
@@ -292,7 +306,7 @@ class PersonTest {
     @Test
     void getPets() {
         //arrange
-        father.addPet(father, cat);
+        father.addPet(cat);
 
         //act
         String output = father.getPets().get(0).getName();
